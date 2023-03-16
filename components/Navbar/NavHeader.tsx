@@ -7,6 +7,7 @@ interface HeaderProps {
         alt: string;
         src?: StaticImageData;
     }
+    onClick: (evt: React.MouseEvent) => void;
 }
 
 export default function NavHeader(props: HeaderProps) {
@@ -14,8 +15,9 @@ export default function NavHeader(props: HeaderProps) {
         username,
         imageProps: {
             alt,
-            src= 'profilepic'
-        }
+            src=''
+        },
+        onClick
     } = props
     return (
         <div className={styles.headerContainer}>
@@ -23,7 +25,7 @@ export default function NavHeader(props: HeaderProps) {
                 <Image className={styles.profilePic} src={src} alt={alt} height={5} width={5}/>
                 <h4 className={styles.headerTitle}>{username}'s board</h4>
             </div>
-            <button> > </button>
+            <button onClick={onClick}> > </button>
             {/* <Image className={styles.headerIcon} src={''} alt={'Expand Icon'} width={20} height={20}/>  */}
         </div>
     )

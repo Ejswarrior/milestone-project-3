@@ -46,19 +46,23 @@ export default function NavBar() {
     
     const [listItem, addListItem] = useState(listData)
 
-    const navbarStyles = [styles.navbar]
+    const navbarStyles = [styles.navBar]
 
     if (isExpanded) navbarStyles.push(styles.expanded)
+
     return (
-        <div className={styles.navBar}>
-            <NavHeader imageProps={headerData} username="Ejswarrior" />
-            <List data={listItem}/>
+        <div className={navbarStyles.join(' ')}>
+            <NavHeader imageProps={headerData} onClick={() => setIsExpanded(!isExpanded)} username="Ejswarrior" />
+            <div className={styles.listContainer}>
+                <List data={listItem}/>
+            </div>
             <div className={styles.addItemButton}>
                 <ListItem href='/newboard' src={fish} alt={'link'}>Add a board</ListItem>
             </div>
             <div className={styles.navFooter}>
                 <h1 className={styles.footerTitle}>Planitize</h1>
             </div>
+            {!isExpanded && <button className={styles.expandButton} onClick={() => setIsExpanded(!isExpanded)}></button>}
         </div>
     )
 } 
