@@ -1,9 +1,11 @@
 import List from "@/components/List/List"
 import NavBar from "@/components/Navbar/Navbar"
-import fish from '../../public/fishpic.jpg';
-
+import Taskbar from "@/components/Taskbar/Taskbar"
+import BoardBar from "@/components/BoardBar/BoardBar"
 export default function home() {
     return (
-            <NavBar />
+        <>
+            <BoardBar title='Todo' />
+        </>
     )
 }

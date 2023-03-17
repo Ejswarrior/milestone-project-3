@@ -1,0 +1,37 @@
+.classItem {
+    width: 250px;
+    height: 78px;
+    display: flex;
+    padding: 4px;
+    align-items: flex-start;
+    flex-direction: column;
+    border-radius: 12px;
+    gap: 10px;
+    border: 1px solid #FFFFFF;
+
+    .titleDateGroup{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-direction: row;
+        width: 100%;
+
+        .title {
+            font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            font-size: 14px;
+            font-weight: 700;
+        }
+
+        .dueDate {
+            font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            font-size: 14px;
+            font-weight: 500;
+        }
+    }
+
+    .commentGroup {
+        display: flex;
+        align-items: center;
+        width: 100%;
+    }
+}
