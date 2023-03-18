@@ -1,5 +1,6 @@
 import './globals.scss'
 import NavBar from "@/components/Navbar/Navbar";
+import styles from './page.module.scss';
 
 
 export const metadata = {
@@ -15,8 +16,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <NavBar />
-        {children}
+        <div className={styles.container}>
+          <NavBar />
+          {children}
+        </div>
       </body>
     </html>
   )

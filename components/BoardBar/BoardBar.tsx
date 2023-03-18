@@ -13,20 +13,21 @@ interface BoardBarProps {
     /**
      * Content added to the drop down section
      */
-    content:() => React.ReactNode;
+    content?:() => React.ReactNode;
 
     id: string;
+
+    onClick: () => void;
 }
 
 export default function BoardBar(props: BoardBarProps) {
-    const {title, content} = props
+    const {title, content, onClick} = props
 
     const [isOpen, setIsOpen] = useState(false)
 
     const _onDrop = (evt: React.DragEvent<HTMLDivElement>) => {
-        evt.dataTransfer.getData('drag-item')
-        console.log(document.getElementById('item1'))
-        evt.currentTarget.appendChild(document.getElementById('item1'))
+        const data = document.getElementById(evt.dataTransfer.getData('drag-item'))
+        {data && evt.currentTarget.append(data)}
     }
 
     return (
@@ -34,6 +35,7 @@ export default function BoardBar(props: BoardBarProps) {
         onDragOver={(evt: React.DragEvent<HTMLDivElement>) => {
             evt.preventDefault()
         }} 
+        id={title}
         onDrop={_onDrop} 
         className={styles.board}>
             <div className={styles.titleGroup}>
@@ -41,11 +43,11 @@ export default function BoardBar(props: BoardBarProps) {
                 <button className={styles.button} onClick={() => {setIsOpen(!isOpen)}}><Image src={settings} alt='Settings Icon' width={15} height={15}/></button>
                 {isOpen && (
                     <div className={styles.dropDown}>
-                         <button 
+                        <button 
                         onClick={() => {setIsOpen(!isOpen)}} 
                         className={styles.dropDownButton}
                         >Add</button>
-                        
+
                         <button 
                         onClick={() => {setIsOpen(!isOpen)}} 
                         className={styles.dropDownButton}
