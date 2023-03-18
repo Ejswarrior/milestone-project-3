@@ -14,14 +14,10 @@ interface BoardBarProps {
      * Content added to the drop down section
      */
     content?:() => React.ReactNode;
-
-    id: string;
-
-    onClick: () => void;
 }
 
 export default function BoardBar(props: BoardBarProps) {
-    const {title, content, onClick} = props
+    const {title, content} = props
 
     const [isOpen, setIsOpen] = useState(false)
 

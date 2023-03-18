@@ -13,9 +13,15 @@ interface Action {
     evtTarget: string
 }
 
+interface TaskPageProps {
+    /**
+     * onClick event handler
+     */
+    onClick: () => void;
+}
+
 const reducer = (state: State, action: Action): State => {
 const { type, evtTarget } = action;
-const {titleValue, dateValue} = state;
 
 switch (type) {
     case 'updateValue': 
@@ -41,12 +47,10 @@ switch (type) {
 
         default:
             throw('Error')
+    }
 }
-
-return state
-}
-export default function TaskPage() {
-
+export default function TaskPage(props: TaskPageProps) {
+    const {onClick} = props;
 
     const [state, dispatch] = useReducer(reducer, {
         titleValue: '', 
@@ -57,7 +61,11 @@ export default function TaskPage() {
     return (
         <div className={styles.container}>
             <form className={styles.formContainer}>
-                <label className={styles.title}>Title</label>
+                <div className={styles.titleGroup}>
+                    <div className={styles.blocker}></div>
+                    <label className={styles.title}>Title</label>
+                    <button className={styles.closeButton} onClick={onClick}>X</button>
+                </div>
                 <input
                     type='text'
                     placeholder='Add Title...'
