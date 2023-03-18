@@ -29,9 +29,6 @@ export default function BoardBar(props: BoardBarProps) {
         evt.currentTarget.appendChild(document.getElementById('item1'))
     }
 
-    console.log(document.getElementById('item1'))
-
-
     return (
         <div 
         onDragOver={(evt: React.DragEvent<HTMLDivElement>) => {
@@ -44,15 +41,15 @@ export default function BoardBar(props: BoardBarProps) {
                 <button className={styles.button} onClick={() => {setIsOpen(!isOpen)}}><Image src={settings} alt='Settings Icon' width={15} height={15}/></button>
                 {isOpen && (
                     <div className={styles.dropDown}>
+                         <button 
+                        onClick={() => {setIsOpen(!isOpen)}} 
+                        className={styles.dropDownButton}
+                        >Add</button>
+                        
                         <button 
                         onClick={() => {setIsOpen(!isOpen)}} 
                         className={styles.dropDownButton}
                         >Delete</button>
-
-                        <button 
-                        onClick={() => {setIsOpen(!isOpen)}} 
-                        className={styles.dropDownButton}
-                        >Edit</button>
 
                         <button 
                         onClick={() => {setIsOpen(!isOpen)}} 

@@ -1,9 +1,10 @@
 'use client'
 
-import List from "@/components/List/List"
-import NavBar from "@/components/Navbar/Navbar"
-import Taskbar, { TaskbarProps } from "@/components/Taskbar/Taskbar"
-import BoardBar from "@/components/BoardBar/BoardBar"
+import List from "@/components/List/List";
+import Taskbar, { TaskbarProps } from "@/components/Taskbar/Taskbar";
+import BoardBar from "@/components/BoardBar/BoardBar";
+import TaskPage from "@/components/TaskPage/TaskPage";
+import styles from './Home.module.scss'
 
 interface taskbarData {
     taskData: TaskbarProps[]
@@ -52,9 +53,7 @@ export default function home(props: taskbarData) {
         )
     }
     return (
-        <>
-            <BoardBar content={_renderContent} title='Todo' />
-            <Taskbar id={'item1'} assignee={'Erik'} title='Code website' dueDate='10/21' comments={2}/>
-        </>
+        <div className={styles.container}>
+        </div>
     )
 }
