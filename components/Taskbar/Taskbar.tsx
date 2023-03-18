@@ -1,8 +1,9 @@
+'use client';
 import styles from './Taskbar.module.scss';
 import Image from 'next/image';
 import comment from '../../public/speech-bubble.png'
 
-interface TaskbarProps {
+export interface TaskbarProps {
     /**
      * Prop to assign Taskbar
      */
@@ -14,7 +15,7 @@ interface TaskbarProps {
     /**
      * Add dueDate to taskbar
      */
-    dueDate: string;
+    dueDate?: string;
     /**
      * Add number of comments to taskbar
      */
@@ -23,14 +24,21 @@ interface TaskbarProps {
      * 
      * OnClick event handler
      */
-    onClick: () => void;
+    onClick?: () => void;
+    /**
+     * Id for each Taskbar(Used for drag and drop)
+     */
+    id: string;
 }
 
 export default function Taskbar(props: TaskbarProps) {
+    const {assignee, title, dueDate, comments, onClick, id} = props
 
-    const {assignee, title, dueDate, comments, onClick} = props
+    const _onDragStart = (evt: React.DragEvent<HTMLDivElement>) => {
+        evt.dataTransfer.setData("drag-item", evt.currentTarget.id)
+    }
     return (
-        <div onClick={onClick} draggable className={styles.classItem}>
+        <div onClick={onClick} id={id} draggable={true} onDragStart={_onDragStart} className={styles.classItem}>
             <div className={styles.titleDateGroup}>
                 <p className={styles.title}>{title}</p>
                 <p className={styles.dueDate}>{dueDate}</p>

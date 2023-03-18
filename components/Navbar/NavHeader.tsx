@@ -2,11 +2,20 @@ import Image, {StaticImageData} from 'next/image';
 import styles from './Navbar.module.scss'
 
 interface HeaderProps {
+    /**
+     * Username Displayed in NavHeader
+     */
     username: string;
+    /**
+     * Profile Picture in NavHeader
+     */
     imageProps: {
         alt: string;
         src?: StaticImageData;
     }
+    /**
+     * onClick Event Handler for NavHeader
+     */
     onClick: (evt: React.MouseEvent) => void;
 }
 

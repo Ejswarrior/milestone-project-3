@@ -7,7 +7,13 @@ import ListItem from "./ListItem"
 import { ListItemProps } from "./ListItem"
 
 interface ListProps {
+	/**
+	 * Array of List Item props
+	 */
     data: ListItemProps[];
+	/**
+	 * List onClick event handler
+	 */
     onClick?: (evt: React.MouseEvent) => void;
 }
 

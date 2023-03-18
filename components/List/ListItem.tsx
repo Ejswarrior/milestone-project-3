@@ -4,10 +4,25 @@ import { ReactNode } from "react"
 import styles from "./list.module.scss"
 
 export interface ListItemProps {
+    /**
+     * Href for Link Item
+     */
     href?: string;
+    /**
+     * Image source for icons
+     */
     src: StaticImageData;
+    /**
+     * Alt tag for Icons
+     */
     alt: string;
+    /**
+     * Children inside ListItem
+     */
     children?: ReactNode;
+    /**
+     * onClick Event handler 
+     */
     onClick?: (evt: React.MouseEvent) => void
 }
 
