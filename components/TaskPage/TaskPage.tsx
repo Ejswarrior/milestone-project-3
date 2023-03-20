@@ -1,5 +1,5 @@
 import styles from './TaskPage.module.scss';
-import { useState, useReducer } from 'react'
+import { useState, useReducer, HTMLAttributes } from 'react'
 import ButtonPrimary from '../ButtonPrimary/ButtonPrimary';
 
 interface State {
@@ -13,7 +13,7 @@ interface Action {
     evtTarget: string
 }
 
-interface TaskPageProps {
+interface TaskPageProps extends HTMLAttributes<HTMLFormElement> {
     /**
      * onClick event handler
      */
@@ -58,8 +58,20 @@ export default function TaskPage(props: TaskPageProps) {
         assigneeValue: ''
     })
 
+    const _onBlur = (evt: React.FocusEvent<HTMLFormElement>) => {
+
+        console.log("blurred")
+        if(props.onBlur) props.onBlur(evt)
+    }
+
+    const _onFocus = (evt: React.FocusEvent<HTMLFormElement>) => {
+
+        console.log('Focused')
+        if(props.onFocus) props.onFocus(evt)
+    } 
+
     return (
-        <div className={styles.container}>
+        <div onClick={onClick} className={styles.container}>
             <form className={styles.formContainer}>
                 <div className={styles.titleGroup}>
                     <div className={styles.blocker}></div>

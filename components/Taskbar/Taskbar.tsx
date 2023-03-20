@@ -2,8 +2,9 @@
 import styles from './Taskbar.module.scss';
 import Image from 'next/image';
 import comment from '../../public/speech-bubble.png'
+import { HTMLAttributes } from 'react';
 
-export interface TaskbarProps {
+export interface TaskbarProps extends HTMLAttributes<HTMLDivElement> {
     /**
      * Prop to assign Taskbar
      */
@@ -38,6 +39,9 @@ export default function Taskbar(props: TaskbarProps) {
         console.log(evt.currentTarget.id)
         evt.dataTransfer.setData("drag-item", evt.currentTarget.id)
     }
+
+
+
     return (
         <div onClick={onClick} id={id} draggable={true} onDragStart={_onDragStart} className={styles.classItem}>
             <div className={styles.titleDateGroup}>

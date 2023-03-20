@@ -73,7 +73,7 @@ export default function Home(props: taskbarData) {
                 <BoardBar  title="in-progress"/>
                 <BoardBar  title="completed"/>
             </div>
-            {isTaskPage && <TaskPage onClick={() => setIsTaskPage(!isTaskPage)}/>}
+            {isTaskPage && <TaskPage onBlur={() => setIsTaskPage(!isTaskPage)} onClick={() => setIsTaskPage(!isTaskPage)}/>}
         </div>
     )
 }
