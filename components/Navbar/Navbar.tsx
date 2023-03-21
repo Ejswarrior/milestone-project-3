@@ -4,6 +4,7 @@ import fish from '../../public/fishpic.jpg';
 import styles from './Navbar.module.scss'
 import List from "../List/List";
 import ListItem from "../List/ListItem";
+import ListItemForm from "../ListItemForm/ListItemForm";
 import { useState } from "react";
 
 
@@ -19,36 +20,33 @@ export default function NavBar() {
 
     const listData = [
         {
-        href: '/dashboard',
-        src: fish,
-        alt: 'link',
-        children: 'dashboard',
+            href: '/dashboard',
+            children: 'dashboard',
         },
         {
             href: '/Hookset',
-            src: fish,
-            alt: 'link',
             children: 'Hookset',
         },
         {
             href: '/Planboard',
-            src: fish,
-            alt: 'link',
             children: 'Planboard',
         },
         {
             href: '/blogstorm',
-            src: fish,
-            alt: 'link',
             children: 'blogstorm',
         },
     ]
     
     const [listItem, addListItem] = useState(listData)
+    const [isItemInput, setIsItemInput] = useState(false)
 
     const navbarStyles = [styles.navBar]
 
     if (isExpanded) navbarStyles.push(styles.expanded)
+
+    const _onClick = () => {
+        setIsItemInput(true)
+    }
 
     return (
         <div className={navbarStyles.join(' ')}>
@@ -56,8 +54,13 @@ export default function NavBar() {
             <div className={styles.listContainer}>
                 <List data={listItem}/>
             </div>
+            {isItemInput && (
+                <div className={styles.listInput}>
+                    <ListItemForm onSubmit={() => setIsItemInput(false)} onClick={_onClick} />
+                </div>
+            )}
             <div className={styles.addItemButton}>
-                <ListItem href='/newboard' src={fish} alt={'link'}>Add a board</ListItem>
+                <button className={styles.button} onClick={_onClick}>Add a board</button>
             </div>
             <div className={styles.navFooter}>
                 <h1 className={styles.footerTitle}>Planitize</h1>

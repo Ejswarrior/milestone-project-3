@@ -26,7 +26,7 @@ export default function List( props: ListProps ) {
 	return (
 		<ul className={listStyles.join(" ")}>
 			{data.map( ( item, index ) => {
-				return <ListItem key={index} onClick={onClick} src={item.src} alt={item.alt} href={item.href}>{item.children}</ListItem>
+				return <ListItem key={index} onClick={onClick} href={item.href}>{item.children}</ListItem>
 			} )}
 		</ul>
 	)

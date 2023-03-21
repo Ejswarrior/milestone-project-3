@@ -1,18 +1,14 @@
 'use client'
 
-import List from "@/components/List/List";
 import Taskbar, { TaskbarProps } from "@/components/Taskbar/Taskbar";
 import BoardBar from "@/components/BoardBar/BoardBar";
 import TaskPage from "@/components/TaskPage/TaskPage";
-import styles from './Home.module.scss';
+import styles from './Home.module.scss'
 import {useState} from 'react'
 
 interface taskbarData {
     taskData: TaskbarProps[]
 }
-
-
-
 
 export default function Home(props: taskbarData) {
     const {taskData} = props
