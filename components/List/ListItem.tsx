@@ -9,7 +9,7 @@ export interface ListItemProps {
     /**
      * Href for Link Item
      */
-    href?: string;
+    href: string;
     /**
      * Children inside ListItem
      */
