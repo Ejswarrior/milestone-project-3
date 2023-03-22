@@ -3,13 +3,16 @@ import NavHeader from "./NavHeader"
 import fish from '../../public/fishpic.jpg';
 import styles from './Navbar.module.scss'
 import List from "../List/List";
-import ListItem from "../List/ListItem";
+import ListItem, { ListItemProps } from "../List/ListItem";
 import ListItemForm from "../ListItemForm/ListItemForm";
 import { useState } from "react";
 
+interface NavBarProps {
+    data?: ListItemProps[];
+}
 
-
-export default function NavBar() {
+export default function NavBar(props: NavBarProps) {
+    const {data} = props
 
     const [isExpanded, setIsExpanded] = useState(true)
 

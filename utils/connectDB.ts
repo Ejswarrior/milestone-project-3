@@ -1,9 +1,7 @@
-import mongoose from 'mongoose'
-import { config } from 'dotenv'
+import mongoose from 'mongoose';
 
-const connectDB = async () => {
-    
-await mongoose.connect(process.env.MONGO_URI as string)
+const connectDB = async() => {
+    await mongoose.connect("mongodb://localhost:27017/productivity");
 }
 
 
