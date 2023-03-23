@@ -1,0 +1,50 @@
+.button {
+    width: 320px;
+    height: 40px;
+    border-radius: 16px;
+    margin: 10px;
+    background-color: rgb(39, 69, 201);
+    border: none;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 18px;
+    font-weight: 500;
+
+
+    &:hover {
+        background-color: rgb(54, 85, 223);
+    }
+
+    &:active {
+        background-color: rgb(33, 57, 161);
+    }
+
+    &.secondary {
+        background-color: #FFFFFF;
+        border: 1px solid rgb(39, 69, 201);
+        color: rgb(39, 69, 201);
+        font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        font-size: 18px;
+        font-weight: 500;
+
+        &:hover {
+            background-color: rgb(231, 228, 228);
+        }
+    
+        &:active {
+            background-color: rgb(182, 180, 180);
+        }
+
+            &.dark {
+                background-color: #000000;
+                color: #FFFFFF;
+                
+            &:hover {
+                background-color: #161616;
+            }
+        
+            &:active {
+                background-color: #222121;
+            }
+        }
+    }
+} 
