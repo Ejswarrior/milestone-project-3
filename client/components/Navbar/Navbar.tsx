@@ -5,10 +5,10 @@ import styles from './Navbar.module.scss'
 import List from "../List/List";
 import ListItem, { ListItemProps } from "../List/ListItem";
 import ListItemForm from "../ListItemForm/ListItemForm";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 interface NavBarProps {
-    data?: ListItemProps[];
+    data: ListItemProps[];
 }
 
 export default function NavBar(props: NavBarProps) {
@@ -20,27 +20,7 @@ export default function NavBar(props: NavBarProps) {
         src: fish, 
         alt: 'Pic'
     }
-
-    const listData = [
-        {
-            href: '/dashboard',
-            children: 'dashboard',
-        },
-        {
-            href: '/Hookset',
-            children: 'Hookset',
-        },
-        {
-            href: '/Planboard',
-            children: 'Planboard',
-        },
-        {
-            href: '/blogstorm',
-            children: 'blogstorm',
-        },
-    ]
-    
-    const [listItem, addListItem] = useState(listData)
+    const [useData, setData] = useState([{}])
     const [isItemInput, setIsItemInput] = useState(false)
     const [boardTitle, setBoardTitle] = useState('')
 
@@ -52,13 +32,16 @@ export default function NavBar(props: NavBarProps) {
         setIsItemInput(true)
     }
 
-    const _onSubmit = async () => {
-        await fetch('http://localhost:3000/api/boards', {
-            method: 'POST'
-            ,
+    const _onSubmit = async (evt: React.FormEvent<HTMLFormElement>) => {
+        await fetch('http://localhost:8008/home/board-create', {
+            method: 'POST',
             headers: {
-                'content-Type': 'application/json',
-            }        
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            },
+            body: JSON.stringify({
+                title: boardTitle
+            }),
         })
     }
 
@@ -66,16 +49,16 @@ export default function NavBar(props: NavBarProps) {
         console.log(evt.currentTarget.value)
         setBoardTitle(evt.currentTarget.value)
     }
-
+    
     return (
         <div className={navbarStyles.join(' ')}>
             <NavHeader imageProps={headerData} onClick={() => setIsExpanded(!isExpanded)} username="Ejswarrior" />
             <div className={styles.listContainer}>
-                <List data={listItem}/>
+            <List data={data}/>
             </div>
             {isItemInput && (
                 <div className={styles.listInput}>
-                    <ListItemForm onChange={() => _onChange} onSubmit={() => setIsItemInput(false)} onClick={_onClick} />
+                    <ListItemForm onChange={(evt: React.ChangeEvent<HTMLInputElement>) => _onChange(evt)} onSubmit={_onSubmit} onClick={_onClick} />
                 </div>
             )}
             <div className={styles.addItemButton}>

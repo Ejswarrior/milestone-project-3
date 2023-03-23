@@ -2,29 +2,27 @@
 
 import styles from "./ListItemForm.module.scss"
 
-export interface ListItemFormProps extends React.HTMLAttributes<HTMLFormElement>{
-    onClick?: (evt: React.MouseEvent) => void
+export interface ListItemFormProps{
+    onClick?: (evt: React.MouseEvent) => void;
+    onChange: (evt: React.ChangeEvent<HTMLInputElement>) => void;
+    onSubmit: (evt: React.FormEvent<HTMLFormElement>) => void;
 }
 
 export default function ListItemForm( props: ListItemFormProps ) {
 
-	const {onClick, onChange} = props;
-
-    const _onSubmit = (evt: React.FormEvent<HTMLFormElement>) => {
-
-
-        if(props.onSubmit) props.onSubmit(evt)
-    }
+	const {onClick, onChange, onSubmit} = props;
 
 	return (
         <>
-            <form onSubmit={_onSubmit} onChange={onChange} className={styles.formStyles} onClick={onClick}>
+            <form onSubmit={onSubmit} className={styles.formStyles} onClick={onClick}>
                     <input
                         className={styles.listInput}
                         type='text'
                         max={25}
                         autoFocus
+                        onChange={onChange}
                     />
+                    <button type='submit'>submit</button>
             </form>
         </>
 	)

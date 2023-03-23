@@ -1,7 +1,7 @@
 import './globals.scss'
 import NavBar from "@/components/Navbar/Navbar";
 import styles from './page.module.scss';
-import { NextResponse } from 'next/server';
+import { cache } from 'react';
 
 
 export const metadata = {
@@ -10,7 +10,7 @@ export const metadata = {
 }
 
 async function getData() {
-  const res = await fetch('http://localhost:3000/api/boards');
+  const res = await fetch('http://localhost:8008/home/boards', {cache: 'no-store'});
 
   return res.json();
 }
@@ -21,11 +21,14 @@ export default async function RootLayout({
   children: React.ReactNode
 }) {
 
+  const data = await getData();
+  console.log(data)
+
   return (
     <html lang="en">
       <body>
         <div className={styles.container}>
-          <NavBar />
+          <NavBar data={data}/>
           {children}
         </div>
       </body>

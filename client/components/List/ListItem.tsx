@@ -13,7 +13,7 @@ export interface ListItemProps {
     /**
      * Children inside ListItem
      */
-    children?: ReactNode;
+    title?: ReactNode;
     /**
      * onClick Event handler 
      */
@@ -22,7 +22,7 @@ export interface ListItemProps {
 
 export default function ListItem( props: ListItemProps ) {
 
-	const {href, children, onClick} = props;
+	const {href, title, onClick} = props;
 
 	const listItemStyles = [styles.listStyles]
 
@@ -31,7 +31,7 @@ export default function ListItem( props: ListItemProps ) {
             <Link className={styles.link} href={href}>
                 <li className={listItemStyles.join( " " )} onClick={onClick}>
                     <Image src={fish} alt={"Notebook Icon"} className={styles.listImage} height={20} width={20}/>
-                    <p className={styles.listChildren}>{children}</p>
+                    <p className={styles.listChildren}>{title}</p>
                 </li>
             </Link> 
         </>
