@@ -1,0 +1,51 @@
+.board {
+    width: 247px;
+    height: 80%;
+    position: relative;
+    box-shadow: 1px 1px 3px 1px #615e5e;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+
+    .titleGroup {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border-bottom: 1px solid #FFFFFF;
+        width: 100%;
+
+        .title {
+            font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            font-size: 16px;
+            font-weight: 500;
+        }
+
+        .button {
+            background: transparent;
+            border: none;
+        }
+    }
+
+    .dropDown {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        position: absolute;
+        right: 0;
+        gap: 4px;
+        top: 18px;
+
+        .dropDownButton {
+            border: none;
+            width: 40px;
+            height: 15px;
+            background-color: transparent;
+
+            &:hover {
+                color: rgb(86, 127, 127);
+            }
+        }
+    }
+}

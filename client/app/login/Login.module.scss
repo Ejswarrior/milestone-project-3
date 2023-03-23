@@ -1,0 +1,41 @@
+
+.login{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+
+    .formContainer {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+        width: 500px;
+        height: 600px;
+        margin-top: 60px;
+        background-color: #141414;
+        border: 1px solid #d3d0d0;
+        border-radius: 16px;
+
+        .innerContainer {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            .title{
+                font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+                font-weight: 500;
+                font-size: 40px;
+                margin-bottom: 48px;
+            }
+
+            .emailInput {
+                margin-bottom: 20px;
+            }
+            
+        }
+        .buttonContainer {
+            margin-top: 48px;
+            margin-bottom: 48px;
+        }
+    }
+}

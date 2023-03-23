@@ -1,0 +1,53 @@
+.link {
+    width: 100%;
+    height: 100%;
+
+    .listStyles {
+        width: 100%;
+        height: 35px;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        list-style: none;
+        background-color: #171718;
+        border-radius: 8px;
+
+        .listInput {
+            width: 80%;
+            height: 100%;
+            border: none;
+        }
+        
+        .listImage {
+            height: 15px;
+            width: 15px;
+            margin: 0 10px;
+        }
+
+        .listChildren {
+            font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            font-size: 16px;
+            font-weight: 500;
+            color: white;
+            text-decoration: none;
+        }
+
+        &:hover {
+            background-color: #36343A;
+        }
+
+        &:active {
+            background-color: #131312;
+        }
+
+    }
+}
+.list {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    gap: 8px;
+    padding: 0;
+}

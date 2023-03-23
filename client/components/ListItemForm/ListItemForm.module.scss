@@ -1,0 +1,20 @@
+.formStyles {
+    width: 100%;
+    height: 35px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    list-style: none;
+    background-color: #171718;
+    border-radius: 8px;
+
+    .listInput {
+            width: 80%;
+            height: 60%;
+            border: none;
+
+            &:focus-within {
+                border: none;
+            }
+    }
+}
