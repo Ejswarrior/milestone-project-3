@@ -22,7 +22,6 @@ export default function ListItemForm( props: ListItemFormProps ) {
                         autoFocus
                         onChange={onChange}
                     />
-                    <button type='submit'>submit</button>
             </form>
         </>
 	)

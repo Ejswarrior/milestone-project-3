@@ -35,8 +35,8 @@ export interface TaskbarProps extends HTMLAttributes<HTMLDivElement> {
 export default function Taskbar(props: TaskbarProps) {
     const {assignee, title, dueDate, comments, onClick, id} = props
 
+
     const _onDragStart = (evt: React.DragEvent<HTMLDivElement>) => {
-        console.log(evt.currentTarget.id)
         evt.dataTransfer.setData("drag-item", evt.currentTarget.id)
     }
 
