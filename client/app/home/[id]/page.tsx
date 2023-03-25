@@ -1,19 +1,23 @@
 'use client'
 
 import Taskbar, { TaskbarProps } from "@/components/Taskbar/Taskbar";
-import BoardBar from "@/components/BoardBar/BoardBar";
+import BoardBar, {BoardBarProps} from "@/components/BoardBar/BoardBar";
 import TaskPage from "@/components/TaskPage/TaskPage";
-import styles from './Home.module.scss'
+import styles from '../Home.module.scss'
 import {useState, useEffect} from 'react'
 
 interface taskbarData {
-    taskData: TaskbarProps[]
+    taskData: TaskbarProps[];
+}
+
+interface ClipboardProps extends BoardBarProps {
+    id: string;
 }
 
 export default async function Home(props: taskbarData, params: string) {
 
     const [isTaskPage, setIsTaskPage] = useState(false)
-    const [boardData, setData] = useState([{}])
+    const [boardData, setData] = useState([])
 
     useEffect(() => {
         async function getData() {
@@ -22,13 +26,14 @@ export default async function Home(props: taskbarData, params: string) {
             if(res.ok) {
                 try {
                     const result = await res.json()
-                    setData(result)
+                    setData(Object.values(result))
                 }catch {
                     const error = res.statusText
                     return Promise.reject(error)
                 }
             }
         }
+        getData()
       }, [])
 
     const data = [
@@ -80,8 +85,8 @@ export default async function Home(props: taskbarData, params: string) {
             </div>
 
             <div className={styles.contentContainer}>
-                {boardData.map((item) => {
-                    <BoardBar content={_renderContent} {...item}/>
+                {boardData.map((item: ClipboardProps, index: number) => {
+                    return <BoardBar key={index + 1} content={() => <div>Hello</div>} title={item.title} />
                 })}
             </div>
             {isTaskPage && <TaskPage onClick={() => setIsTaskPage(!isTaskPage)}/>}

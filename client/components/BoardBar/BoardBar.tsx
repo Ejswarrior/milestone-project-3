@@ -5,7 +5,7 @@ import settings from '../../public/more.png'
 import Image from 'next/image';
 import { useState } from 'react';
 
-interface BoardBarProps {
+export interface BoardBarProps {
     /**
      * Title for the BoardBar
      */
