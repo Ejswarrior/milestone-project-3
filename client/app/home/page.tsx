@@ -64,6 +64,9 @@ export default function Home(props: taskbarData) {
             </div>
 
             <div className={styles.contentContainer}>
+                <BoardBar content={_renderContent} title="to-do"/>
+                <BoardBar  title="in-progress"/>
+                <BoardBar  title="completed"/>
             </div>
             {isTaskPage && <TaskPage onClick={() => setIsTaskPage(!isTaskPage)}/>}
         </div>
