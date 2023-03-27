@@ -1,5 +1,7 @@
 'use client'
 
+import {useRouter} from 'next/navigation'
+import { usePathname, useSearchParams } from 'next/navigation';
 import Taskbar, { TaskbarProps } from "@/components/Taskbar/Taskbar";
 import BoardBar, {BoardBarProps} from "@/components/BoardBar/BoardBar";
 import TaskPage from "@/components/TaskPage/TaskPage";
@@ -14,69 +16,24 @@ interface ClipboardProps extends BoardBarProps {
     id: string;
 }
 
-export default async function Home(props: taskbarData, params: string) {
+export default function Home({params} : {params: {id: string}}) {
 
-    const [isTaskPage, setIsTaskPage] = useState(false)
+    const id = params.id
+    const router = useRouter();
+    const pathname = usePathname();
+    const searchParams = useSearchParams();
     const [boardData, setData] = useState([])
+    const [isTaskPage, setIsTaskPage] = useState(false)
 
     useEffect(() => {
         async function getData() {
-            const res = await fetch(`http://localhost:8008/home/${params}`)
-
-            if(res.ok) {
-                try {
-                    const result = await res.json()
-                    setData(Object.values(result))
-                }catch {
-                    const error = res.statusText
-                    return Promise.reject(error)
-                }
-            }
+            const res = await fetch(`http://localhost:8008/home/${params.id}`)
+            const data = await res.json()
+            setData(data)
         }
+
         getData()
       }, [])
-
-    const data = [
-        {
-            assignee:'Erik',
-            title: 'Code website',
-            dueDate:'10/21',
-            comments: 2,
-            id: 'item2',
-            onClick:() => setIsTaskPage(!isTaskPage)
-        },
-        {
-            assignee:'Erik',
-            title: 'Code website',
-            dueDate:'10/21',
-            comments: 2,
-            id: 'item3'
-        },
-        {
-            assignee:'Erik',
-            title: 'Code website',
-            dueDate:'10/21',
-            comments: 2,
-            id: 'item4'
-        },
-        {
-            assignee:'Erik',
-            title: 'Code website',
-            dueDate:'10/21',
-            comments: 2,
-            id: 'item5'
-        },
-    ]
-    
-    const _renderContent = () => {
-        return (
-            <div>
-            {data.map((item) => (
-                <Taskbar key={item.id} {...item}/>
-            ))}
-            </div>
-        )
-    }
 
     return (
         <div className={styles.container}>
@@ -85,8 +42,13 @@ export default async function Home(props: taskbarData, params: string) {
             </div>
 
             <div className={styles.contentContainer}>
-                {boardData.map((item: ClipboardProps, index: number) => {
-                    return <BoardBar key={index + 1} content={() => <div>Hello</div>} title={item.title} />
+                {boardData.map((item, index) => {
+                    return <BoardBar key={index + 1} id={id} title={item.title}
+                    content={() => 
+                        item?.tasks?.map((items, index) => (
+                            <Taskbar key={items.title} title={items.title} assignee={items.assignee} dueDate={items.dueDate} />
+                        ))}
+                    />
                 })}
             </div>
             {isTaskPage && <TaskPage onClick={() => setIsTaskPage(!isTaskPage)}/>}

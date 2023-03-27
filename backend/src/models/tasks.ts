@@ -1,6 +1,6 @@
 import {Schema, model, Types} from 'mongoose';
 
-interface tasks {
+export interface tasks {
     assignee: string;
     title: string;
     dueDate: Date;
@@ -11,9 +11,9 @@ const tasksSchema = new Schema<tasks>({
         title: { type: String, required: true},
         assignee: {type: String},
         dueDate: {type: Date},
-        comments: [{type: Schema.Types.ObjectId, ref:'Tasks'}],
+        // comments: [{type: Schema.Types.ObjectId, ref:'Tasks'}],
 })
 
-const Boards = model<tasks>('boards', tasksSchema);
+const Tasks = model<tasks>('tasks', tasksSchema);
 
-export default Boards;
+export default Tasks;

@@ -58,10 +58,25 @@ export default function TaskPage(props: TaskPageProps) {
         assigneeValue: ''
     })
 
+    const _onSubmit = async (evt: React.FormEvent<HTMLFormElement>) => { 
+        console.log('submit')
+        await fetch('http://localhost:8008/home/clipboard-create', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            },
+            body: JSON.stringify({
+                title: state.titleValue,
+                date: state.dateValue,
+                assignee: state.assigneeValue
+            })
+        })
+    }
 
     return (
         <div className={styles.container}>
-            <form onSubmit={(evt: React.FormEvent<HTMLFormElement>) => {console.log(evt)}}  className={styles.formContainer}>
+            <form onSubmit={_onSubmit}  className={styles.formContainer}>
                 <div className={styles.titleGroup}>
                     <div className={styles.blocker}></div>
                     <label className={styles.title}>Title</label>
@@ -90,7 +105,7 @@ export default function TaskPage(props: TaskPageProps) {
                         maxLength={40}
                         onChange={(evt: React.ChangeEvent<HTMLInputElement>) => {
                             dispatch({
-                                type: 'assigneeValue',
+                                type: 'updateAssignee',
                                 evtTarget: evt.currentTarget.value
                             })
                         }

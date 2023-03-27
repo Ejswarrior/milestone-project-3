@@ -20,7 +20,7 @@ export interface TaskbarProps extends HTMLAttributes<HTMLDivElement> {
     /**
      * Add number of comments to taskbar
      */
-    comments: number;
+    comments?: number;
     /**
      * 
      * OnClick event handler
