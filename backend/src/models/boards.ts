@@ -8,7 +8,7 @@ interface boards {
 
 const boardSchema = new Schema<boards>({
         title: { type: String, required: true},
-        // clipboards: [{type: Schema.Types.ObjectId, ref:'clipboards'}],
+        clipboards: [{type: Schema.Types.ObjectId, ref:'clipboards'}],
 })
 
 const Boards = model<boards>('boards', boardSchema);

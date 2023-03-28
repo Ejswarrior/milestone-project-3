@@ -22,7 +22,6 @@ export default async function RootLayout({
 }) {
 
   const data = await getData();
-  console.log(data)
 
   return (
     <html lang="en">

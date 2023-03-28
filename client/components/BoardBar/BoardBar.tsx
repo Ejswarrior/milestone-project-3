@@ -3,27 +3,55 @@
 import styles from './BoardBar.module.scss';
 import settings from '../../public/more.png'
 import Image from 'next/image';
-import { useState } from 'react';
-
+import React, { useState } from 'react';
+import { useRouter } from 'next/router';
 export interface BoardBarProps {
     /**
      * Title for the BoardBar
      */
     title: string;
     /**
+     * Id for the BoardBar
+     */
+    id: string;
+    /**
      * Content added to the drop down section
      */
     content?:() => React.ReactNode;
+    /**
+     * onClick event handler
+     */
+    onClick: (evt: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
 export default function BoardBar(props: BoardBarProps) {
-    const {title, content} = props
+    const {title, content, id} = props
 
     const [isOpen, setIsOpen] = useState(false)
 
-    const _onDrop = (evt: React.DragEvent<HTMLDivElement>) => {
+    const _onDrop = async (evt: React.DragEvent<HTMLDivElement>) => {
         const data = document.getElementById(evt.dataTransfer.getData('drag-item'))
+        
+        console.log(evt.dataTransfer.getData('parent-item'))
         {data && evt.currentTarget.append(data)}
+
+        await fetch('http://localhost:8008/home/clipboard-move', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            },
+            body: JSON.stringify({
+                clipboardId: evt.currentTarget.id,
+                parentId: evt.dataTransfer.getData('parent-item'),
+                taskId:  evt.dataTransfer.getData('drag-item'),
+            })
+        })
+    }
+
+    const _onClick = (evt: React.MouseEvent<HTMLButtonElement>) => {
+        setIsOpen(!isOpen)
+        if(props.onClick) props.onClick(evt);
     }
 
     return (
@@ -31,7 +59,7 @@ export default function BoardBar(props: BoardBarProps) {
         onDragOver={(evt: React.DragEvent<HTMLDivElement>) => {
             evt.preventDefault()
         }} 
-        id={title}
+        id={id}
         onDrop={_onDrop} 
         className={styles.board}>
             <div className={styles.titleGroup}>
@@ -40,7 +68,7 @@ export default function BoardBar(props: BoardBarProps) {
                 {isOpen && (
                     <div className={styles.dropDown}>
                         <button 
-                        onClick={() => {setIsOpen(!isOpen)}} 
+                        onClick={_onClick} 
                         className={styles.dropDownButton}
                         >Add</button>
 
@@ -56,7 +84,7 @@ export default function BoardBar(props: BoardBarProps) {
                     </div>
                 )}
             </div>
-            {content && <div>{content()}</div>}
+            {content && <>{content()}</>}
         </div>
     )
 }

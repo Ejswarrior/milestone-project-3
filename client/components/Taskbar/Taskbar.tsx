@@ -37,7 +37,9 @@ export default function Taskbar(props: TaskbarProps) {
 
 
     const _onDragStart = (evt: React.DragEvent<HTMLDivElement>) => {
+        console.log(evt?.currentTarget.parentElement)
         evt.dataTransfer.setData("drag-item", evt.currentTarget.id)
+        evt.dataTransfer.setData("parent-item", evt.currentTarget.parentElement?.id)
     }
 
 

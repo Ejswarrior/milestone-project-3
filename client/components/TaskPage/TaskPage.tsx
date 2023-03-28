@@ -18,6 +18,9 @@ interface TaskPageProps {
      * onClick event handler
      */
     onClick: () => void;
+    titleValue?: string;
+    assigneeValue?: string;
+    dateValue?: string;
 }
 
 const reducer = (state: State, action: Action): State => {
@@ -53,9 +56,9 @@ export default function TaskPage(props: TaskPageProps) {
     const {onClick} = props;
 
     const [state, dispatch] = useReducer(reducer, {
-        titleValue: '', 
-        dateValue: '', 
-        assigneeValue: ''
+        titleValue: props.titleValue || '', 
+        dateValue: props.dateValue || '', 
+        assigneeValue: props.dateValue ||  '',
     })
 
     const _onSubmit = async (evt: React.FormEvent<HTMLFormElement>) => { 
@@ -68,11 +71,13 @@ export default function TaskPage(props: TaskPageProps) {
             },
             body: JSON.stringify({
                 title: state.titleValue,
-                date: state.dateValue,
+                dueDate: state.dateValue,
                 assignee: state.assigneeValue
             })
         })
-    }
+    }   
+
+    console.log(typeof state.dateValue.toString())
 
     return (
         <div className={styles.container}>

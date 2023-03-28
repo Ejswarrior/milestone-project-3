@@ -27,7 +27,7 @@ export default function Home({params} : {params: {id: string}}) {
 
     useEffect(() => {
         async function getData() {
-            const res = await fetch(`http://localhost:8008/home/${params.id}`)
+            const res = await fetch(`http://localhost:8008/home/${params.id}`, { cache: 'no-store'})
             const data = await res.json()
             setData(data)
         }
@@ -35,6 +35,9 @@ export default function Home({params} : {params: {id: string}}) {
         getData()
       }, [])
 
+      const _onClick = (evt: React.MouseEvent<HTMLButtonElement>) => {
+        setIsTaskPage(!isTaskPage)
+      }
     return (
         <div className={styles.container}>
             <div className={styles.Topbar}>
@@ -42,11 +45,12 @@ export default function Home({params} : {params: {id: string}}) {
             </div>
 
             <div className={styles.contentContainer}>
-                {boardData.map((item, index) => {
-                    return <BoardBar key={index + 1} id={id} title={item.title}
+                {boardData.map((item:BoardBarProps, index: number) => {
+                    console.log(item.tasks[1])
+                    return <BoardBar key={index + 1} onClick={_onClick} id={item._id} title={item.title}
                     content={() => 
-                        item?.tasks?.map((items, index) => (
-                            <Taskbar key={items.title} title={items.title} assignee={items.assignee} dueDate={items.dueDate} />
+                        item?.tasks?.map((items: TaskbarProps, index: number) => (
+                            <Taskbar key={items.title} title={items.title} dueDate={items.dueDate} assignee={items.assignee} id={items?._id} dueDate={items.dueDate} />
                         ))}
                     />
                 })}
