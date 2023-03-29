@@ -18,6 +18,12 @@ router.get('/:id', async(req, res) => {
     return res.json(clipboards)
 })
 
+router.get('/get-tasks/:id', async(req, res) => {
+    const getTask = await Tasks.findById(req.params.id)
+    console.log(getTask)
+    return res.json(getTask)
+})
+
 router.post('/board-create', async(req, res) => {
     const createBoard = await Boards.create(req.body)
     res.redirect('/')

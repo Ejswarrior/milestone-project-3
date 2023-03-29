@@ -13,11 +13,11 @@ interface Action {
     evtTarget: string
 }
 
-interface TaskPageProps {
+interface TaskPageProps extends HTMLAttributes<HTMLFormElement> {
     /**
      * onClick event handler
      */
-    onClick: () => void;
+    onClick?: () => void;
     titleValue?: string;
     assigneeValue?: string;
     dateValue?: string;
@@ -56,13 +56,12 @@ export default function TaskPage(props: TaskPageProps) {
     const {onClick} = props;
 
     const [state, dispatch] = useReducer(reducer, {
-        titleValue: props.titleValue || '', 
-        dateValue: props.dateValue || '', 
-        assigneeValue: props.dateValue ||  '',
+        titleValue: props.titleValue ? props.titleValue : '', 
+        dateValue: props.dateValue ? props.dateValue : '', 
+        assigneeValue: props.assigneeValue ? props.assigneeValue : '',
     })
 
     const _onSubmit = async (evt: React.FormEvent<HTMLFormElement>) => { 
-        console.log('submit')
         await fetch('http://localhost:8008/home/clipboard-create', {
             method: 'POST',
             headers: {
@@ -76,8 +75,6 @@ export default function TaskPage(props: TaskPageProps) {
             })
         })
     }   
-
-    console.log(typeof state.dateValue.toString())
 
     return (
         <div className={styles.container}>
