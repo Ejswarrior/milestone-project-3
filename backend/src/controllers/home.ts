@@ -20,7 +20,6 @@ router.get('/:id', async(req, res) => {
 
 router.get('/get-tasks/:id', async(req, res) => {
     const getTask = await Tasks.findById(req.params.id)
-    console.log(getTask)
     return res.json(getTask)
 })
 
@@ -37,6 +36,22 @@ router.post('/clipboard-create', async(req, res) => {
     await clipboards[0].tasks.push(Taskz.id);
     clipboards[0].save()
     res.redirect('/:id')
+})
+
+router.put('/clipboard-update', async(req,res) => {
+    const {title, dueDate, assignee, id} = req.body
+    const taskFound = await Tasks.findByIdAndUpdate(id, {
+        title: title,
+        dueDate: dueDate,
+        assignee: assignee,
+    })
+    res.redirect('/home')
+})
+
+router.delete('/clipboard-delete', async (req, res) => {
+    const taskDeleted = await Tasks.findByIdAndDelete(req.body.id)
+
+    res.redirect(307, "/home");
 })
 
 router.post('/clipboard-move', async(req, res) => {

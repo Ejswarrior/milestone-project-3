@@ -17,13 +17,9 @@ interface ClipboardProps extends BoardBarProps {
 }
 
 export default function Home({params} : {params: {id: string}}) {
-
-    const id = params.id
-    const router = useRouter();
-    const pathname = usePathname();
-    const searchParams = useSearchParams();
     const [boardData, setData] = useState([])
     const [isTaskPage, setIsTaskPage] = useState(false)
+    const router = useRouter();
 
     useEffect(() => {
         async function getData() {
@@ -41,7 +37,7 @@ export default function Home({params} : {params: {id: string}}) {
     return (
         <div className={styles.container}>
             <div className={styles.Topbar}>
-                <h1 className={styles.title}>Hookset</h1>
+                <h1 className={styles.title}>Notebook</h1>
             </div>
 
             <div className={styles.contentContainer}>
@@ -50,7 +46,7 @@ export default function Home({params} : {params: {id: string}}) {
                     return <BoardBar key={index + 1} onClick={_onClick} id={item._id} title={item.title}
                     content={() => 
                         item?.tasks?.map((items: TaskbarProps, index: number) => (
-                            <Taskbar key={items.title} title={items.title} dueDate={items.dueDate} assignee={items.assignee} id={items?._id} dueDate={items.dueDate} />
+                            <Taskbar key={items.title} title={items.title} dueDate={items.dueDate} assignee={items.assignee} id={items?._id} onClick={() => router.push(`/home/update-task/${items._id}`)} />
                         ))}
                     />
                 })}

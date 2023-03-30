@@ -1,0 +1,134 @@
+.container{
+    display: flex;
+    width: 50%;
+    height: 100%;
+    border: 1px solid #FFFFFF;
+    position: absolute;
+    right: 0;
+    top: 0;
+    background-color: #0c0c0c;
+
+    .formContainer {
+        height: 100%;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        justify-content: flex-start;
+
+        .titleGroup {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            height: 45px;
+            .title {
+                align-self: center;
+                font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+                font-size: 22px;
+                font-weight: 700;
+                margin-bottom: 5px;
+            }
+    
+            .closeButton {
+                border: none;
+                background-color: transparent;
+                height: 20px;
+                width: 20px;
+                margin-right: 15px;
+            }
+        }
+
+        .titleInput {
+            width: 100%;
+            height: 49px;
+            border: none;
+            margin-bottom: 38px;
+            background-color: #0e0e0e;
+            border-width: 0 0 80% 0 ;
+
+            &:hover {
+                background-color: #161616;
+            }
+        }
+
+        .assigneeContainer {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 28px;
+            align-self: flex-start;
+
+            .assigneeTitle {
+                font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+                font-size: 16px;
+                font-weight: 500;
+                margin-bottom: 5px;
+            }
+
+            .assigneeInput {
+                width: 250px;
+                height: 37px;
+                border: none;
+                background-color: #0e0e0e;
+
+                &:hover {
+                    background-color: #161616;
+                }
+            }
+        }
+        .dateSelectContainer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            .dateGroup {
+                display: flex;
+                align-self: flex-start;
+                flex-direction: column;
+                .dateTitle {
+                    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+                    font-size: 16px;
+                    font-weight: 500;
+                    margin-bottom: 5px;
+                }
+                .dateInput {
+                    border: none;
+                    background-color: transparent;
+
+                    &:hover {
+                        background-color: #161616;
+                    }
+                }
+            }
+        }
+
+
+        .commentSection {
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            width: 100%;
+            min-height: 300px;
+            overflow-y: auto;
+
+            .commentContainer {
+                display: flex;
+                align-items: center;
+                justify-content: flex-start;
+                height: 100%;
+            }
+
+            .commentForm {
+                display: flex;
+                .commentInput {
+                    border: none;
+                    width: 300px;
+                    height: 43px;
+                    background-color: transparent;
+                    border-bottom: 1px solid #FFFFFF;
+                }
+            }
+        }
+    }
+}
+   
