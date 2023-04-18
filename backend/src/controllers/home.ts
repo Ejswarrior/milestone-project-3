@@ -40,12 +40,17 @@ router.post('/clipboard-create', async(req, res) => {
 
 router.put('/clipboard-update', async(req,res) => {
     const {title, dueDate, assignee, id} = req.body
-    const taskFound = await Tasks.findByIdAndUpdate(id, {
-        title: title,
-        dueDate: dueDate,
-        assignee: assignee,
-    })
-    res.redirect('/home')
+    try {
+        const taskFound = await Tasks.findByIdAndUpdate(id, {
+            title: title,
+            dueDate: dueDate,
+            assignee: assignee,
+        })
+        res.redirect('/home')
+    }
+    catch {
+        res.status(400).send('Could not update clipboard')
+    }
 })
 
 router.delete('/clipboard-delete', async (req, res) => {
