@@ -4,7 +4,7 @@ import {useRouter} from 'next/navigation'
 import { usePathname, useSearchParams } from 'next/navigation';
 import Taskbar, { TaskbarProps } from "@/components/Taskbar/Taskbar";
 import BoardBar, {BoardBarProps} from "@/components/BoardBar/BoardBar";
-import TaskPage from "@/components/TaskPage/TaskPage";
+import TaskPage from '../../../components/TaskPage/TaskPage';
 import styles from '../Home.module.scss'
 import {useState, useEffect} from 'react'
 
@@ -34,6 +34,7 @@ export default function Home({params} : {params: {id: string}}) {
       const _onClick = (evt: React.MouseEvent<HTMLButtonElement>) => {
         setIsTaskPage(!isTaskPage)
       }
+      console.log(boardData)
     return (
         <div className={styles.container}>
             <div className={styles.Topbar}>

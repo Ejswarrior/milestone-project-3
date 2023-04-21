@@ -1,7 +1,7 @@
 'use client'
 import styles from './Update.module.scss';
 import { useState, useReducer, HTMLAttributes, useEffect } from 'react'
-import ButtonPrimary from '@/components/ButtonPrimary/ButtonPrimary';
+import ButtonPrimary from '../../../../components/ButtonPrimary/ButtonPrimary';
 import { useRouter } from 'next/navigation';
 
 interface State {
@@ -65,7 +65,6 @@ export default function Home({params} : {params: {id: string}}) {
         dateValue: data.dueDate, 
         assigneeValue: data.assignee,
     })
-    console.log(data.title)
 
     const _onSubmit = async (evt: React.FormEvent<HTMLFormElement>) => { 
 
