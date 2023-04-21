@@ -14,8 +14,9 @@ router.get('/boards', async(req, res) => {
 })
 
 router.get('/:id', async(req, res) => {
+    const boards = await Boards.find()
     const clipboards = await Clipboard.find().populate<{tasks: tasks[]}>('tasks').orFail()
-    return res.json(clipboards)
+    return res.json({clipboards: clipboards, boards: boards})
 })
 
 router.get('/get-tasks/:id', async(req, res) => {
@@ -29,10 +30,8 @@ router.post('/board-create', async(req, res) => {
 })
 
 router.post('/clipboard-create', async(req, res) => {
-    console.log(req.body)
     const clipboards = await Clipboard.find().populate<{tasks: tasks[]}>('tasks').orFail()
     const Taskz = await Tasks.create(req.body)
-    console.log(Taskz)
     await clipboards[0].tasks.push(Taskz.id);
     clipboards[0].save()
     res.redirect('/:id')

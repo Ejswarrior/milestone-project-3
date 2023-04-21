@@ -60,8 +60,20 @@ export default function Home({params} : {params: {id: string}}) {
             const res = await fetch(`http://localhost:8008/home/get-tasks/${params.id}`, {cache: 'no-store'})
             const data = await res.json()
             setData(data)
+            dispatch({
+                type: 'updateValue',
+                evtTarget: data.title
+            })
+            
+            dispatch({
+                type: 'updateAssignee',
+                evtTarget: data.assignee
+            })
+            dispatch({
+                type: 'updateDate',
+                evtTarget: data.dueDate
+            })
         }
-
         getData()
       }, [])
 
@@ -72,7 +84,7 @@ export default function Home({params} : {params: {id: string}}) {
     })
 
     const _onSubmit = async (evt: React.FormEvent<HTMLFormElement>) => { 
-
+        evt.preventDefault()
         await fetch('http://localhost:8008/home/clipboard-update', {
             method: 'PUT',
             headers: {
@@ -86,7 +98,7 @@ export default function Home({params} : {params: {id: string}}) {
                 id: params.id,
             })
         })
-        await router.push('/home')
+        router.back()
     } 
     const onClick = async () => {
         await fetch('http://localhost:8008/home/clipboard-delete', {
@@ -100,7 +112,7 @@ export default function Home({params} : {params: {id: string}}) {
             })
         })
     }
-    console.log(data.title)
+
     return (
         <div className={styles.container}>
         <form onSubmit={_onSubmit}  className={styles.formContainer}>

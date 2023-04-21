@@ -15,7 +15,7 @@ interface TextInputProps {
 export default function TextInput( props: TextInputProps ) {
 
 	const {
-		type, placeholder, name, id, required, helperText, disabled, error, onChange, surface = "light"
+		type, placeholder, name, id, required, helperText, disabled, error, onChange
 	} = props
 
 	const inputs = [inputStyles.inputContainer]

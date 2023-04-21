@@ -13,7 +13,8 @@ interface taskbarData {
 }
 
 interface ClipboardProps extends BoardBarProps {
-    id: string;
+    _id: string;
+    tasks: TaskbarProps[]
 }
 
 export default function Home({params} : {params: {id: string}}) {
@@ -29,12 +30,13 @@ export default function Home({params} : {params: {id: string}}) {
         }
 
         getData()
-      }, [])
+    }, [])
 
-      const _onClick = (evt: React.MouseEvent<HTMLButtonElement>) => {
+    const _onClick = (evt: React.MouseEvent<HTMLButtonElement>) => {
         setIsTaskPage(!isTaskPage)
-      }
-      console.log(boardData)
+    }
+
+    console.log(boardData)
     return (
         <div className={styles.container}>
             <div className={styles.Topbar}>
@@ -42,8 +44,7 @@ export default function Home({params} : {params: {id: string}}) {
             </div>
 
             <div className={styles.contentContainer}>
-                {boardData.map((item:BoardBarProps, index: number) => {
-                    console.log(item.tasks[1])
+                {boardData.map((item: ClipboardProps, index: number) => {
                     return <BoardBar key={index + 1} onClick={_onClick} id={item._id} title={item.title}
                     content={() => 
                         item?.tasks?.map((items: TaskbarProps, index: number) => (
