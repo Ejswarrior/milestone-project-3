@@ -16,32 +16,38 @@ interface Action {
 }
 
 const reducer = (state: State, action: Action): State => {
-const { type, evtTarget } = action;
+    const { type, evtTarget } = action;
 
-switch (type) {
-    case 'updateValue': 
-        return {
-            ...state,
-            titleValue: evtTarget,
-            ...action,
-        }
-
-    case 'updateDate':
-        return {
-            ...state,
-            dateValue: evtTarget,
-            ...action
-        }
-
-        case 'updateAssignee':
+    switch (type) {
+        case 'update':
             return {
                 ...state,
-                assigneeValue: evtTarget,
                 ...action
             }
 
-        default:
-            throw('Error')
+        case 'updateValue': 
+            return {
+                ...state,
+                titleValue: evtTarget,
+                ...action,
+            }
+
+            case 'updateDate':
+                return {
+                    ...state,
+                    dateValue: evtTarget,
+                    ...action
+                }
+
+            case 'updateAssignee':
+                return {
+                    ...state,
+                    assigneeValue: evtTarget,
+                    ...action
+                }
+
+            default:
+                throw('Error')
     }
 }
 
@@ -58,7 +64,6 @@ export default function Home({params} : {params: {id: string}}) {
 
         getData()
       }, [])
-      console.log(data)
 
     const [state, dispatch] = useReducer(reducer, {
         titleValue: data.title, 
@@ -83,7 +88,6 @@ export default function Home({params} : {params: {id: string}}) {
         })
         await router.push('/home')
     } 
-    
     const onClick = async () => {
         await fetch('http://localhost:8008/home/clipboard-delete', {
             method: 'DELETE',
@@ -96,7 +100,7 @@ export default function Home({params} : {params: {id: string}}) {
             })
         })
     }
-
+    console.log(data.title)
     return (
         <div className={styles.container}>
         <form onSubmit={_onSubmit}  className={styles.formContainer}>
